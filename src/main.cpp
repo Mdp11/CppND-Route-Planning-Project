@@ -44,7 +44,7 @@ int main(int argc, const char **argv)
             else
             {
                 ShowUsage();
-                return 0;
+                return 1;
             }
     }
     else
@@ -60,7 +60,10 @@ int main(int argc, const char **argv)
         std::cout << "Reading OpenStreetMap data from the following file: " << osm_data_file << std::endl;
         auto data = ReadFile(osm_data_file);
         if (!data)
+        {
             std::cout << "Failed to read." << std::endl;
+            return 1;
+        }
         else
             osm_data = std::move(*data);
     }
