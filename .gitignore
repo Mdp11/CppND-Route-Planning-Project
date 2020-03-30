@@ -4,6 +4,7 @@
 draw.cpp
 test.cpp
 build/
+Debug/
 bin/
 lib/
 .vscode/
