@@ -31,9 +31,7 @@ void ShowUsage() {
   std::cout << "Usage: [executable] [-f filename.osm]" << std::endl;
 }
 
-bool ValidInputPoint(float x) {
-  return x == static_cast<float>(static_cast<int>(x)) && x >= 0.f && x <= 100.f;
-}
+bool ValidInputPoint(float x) { return x >= 0.f && x <= 100.f; }
 
 int main(int argc, const char **argv) {
   std::string osm_data_file = "";
@@ -67,8 +65,8 @@ int main(int argc, const char **argv) {
   float start_x{}, start_y{}, end_x{}, end_y{};
   bool valid_values{false};
   while (!valid_values) {
-    std::cout << "Please insert starting and ending x,y coordinates as "
-                 "integers, in a value range of [0-100]:"
+    std::cout << "Please insert starting and ending x,y coordinates in a value "
+                 "range of [0-100]:"
               << std::endl;
     std::cin >> start_x >> start_y >> end_x >> end_y;
 
