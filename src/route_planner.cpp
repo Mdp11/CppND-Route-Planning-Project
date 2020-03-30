@@ -18,13 +18,6 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node)
     return node->distance(*end_node);
 }
 
-// TODO 4: Complete the AddNeighbors method to expand the current node by adding all unvisited neighbors to the open list.
-// Tips:
-// - Use the FindNeighbors() method of the current_node to populate current_node.neighbors vector with all the neighbors.
-// - For each node in current_node.neighbors, set the parent, the h_value, the g_value.
-// - Use CalculateHValue below to implement the h-Value calculation.
-// - For each node in current_node.neighbors, add the neighbor to open_list and set the node's visited attribute to true.
-
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 {
     current_node->FindNeighbors();
@@ -38,15 +31,12 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
     current_node->visited = true;
 }
 
-// TODO 5: Complete the NextNode method to sort the open list and return the next node.
-// Tips:
-// - Sort the open_list according to the sum of the h value and g value.
-// - Create a pointer to the node in the list with the lowest sum.
-// - Remove that node from the open_list.
-// - Return the pointer.
-
 RouteModel::Node *RoutePlanner::NextNode()
 {
+    std::sort(open_list.begin(), open_list.end(), [](const RouteModel::Node *n1, const RouteModel::Node *n2) { return n1->h_value + n1->g_value < n2->h_value + n2->g_value; });
+    auto best_next_node = open_list.back();
+    open_list.pop_back();
+    return best_next_node;
 }
 
 // TODO 6: Complete the ConstructFinalPath method to return the final path found from your A* search.
